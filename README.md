@@ -1,5 +1,6 @@
 # kohinata
-MIzucoffee HOme => miho => miho "kohinata" ?
+Mizucoffee -> coffee -> kōhī => "kohi"nata ?  
+MIzucoffee HOme => miho => miho "kohinata" !
 
 ## 概要
 自分の家の家電をHomeKitに対応させるシステムです。   
