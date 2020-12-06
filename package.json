@@ -1,0 +1,12 @@
+{
+  "name": "kohinata",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mizucoffee/kohinata.git",
+  "author": "Ritsuki Goto <develop@mizucoffee.net>",
+  "license": "MIT",
+  "dependencies": {
+    "hap-nodejs": "^0.8.2",
+    "serialport": "^9.0.3"
+  }
+}
