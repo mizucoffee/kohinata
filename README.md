@@ -4,17 +4,18 @@ MIzucoffee HOme => miho => miho "kohinata" !
 
 ## 概要
 自分の家の家電をHomeKitに対応させるシステムです。   
-ユニットはESP32やArduino、Raspberry Piなどを組み合わせて実装しています。   
+ユニットはESP32やRaspberry Piなどを組み合わせて実装しています。   
 
 大体専用の仕組みなので引っ越したら全滅しそう。
 
 ## アクセサリ説明
 
-### Kitami
+### Shibuya
+赤外線で家電を制御するユニット。ESP32をベースに実装。
+
+#### Kitami
 照明をコントロールするアクセサリ。対象の機器は「Panasonic LGBZ2773」。
 現時点ではオンオフ、色温度の設定に対応しています。
-
-ユニットはArduinoで実装（更新したい）。
 
 ### Sakuma
 環境状態を検出するユニット。ESP32をベースに実装。

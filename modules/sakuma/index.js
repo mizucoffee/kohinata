@@ -1,5 +1,6 @@
 const { Accessory, Categories, Characteristic, Service, uuid } = require("hap-nodejs");
 const SerialPort = require("serialport");
+const git = require("git-rev-sync")
 
 const Asari = require("./asari");
 const Moroboshi = require("./moroboshi");
@@ -16,7 +17,7 @@ accessory
   .getService(Service.AccessoryInformation)
   .setCharacteristic(Characteristic.Manufacturer, "mizucoffee")
   .setCharacteristic(Characteristic.Model, "Sakuma")
-  .setCharacteristic(Characteristic.SerialNumber, "sakuma_2020_12_09_0001")
+  .setCharacteristic(Characteristic.SerialNumber, `sakuma_${git.short()}`)
   .setCharacteristic(
     Characteristic.FirmwareRevision,
     require("../../package.json").version
