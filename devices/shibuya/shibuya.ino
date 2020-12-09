@@ -5,11 +5,15 @@ IRsend irsend(4);
 
 uint64_t str2uint64(String str) {
   uint64_t val = 0;
-  for (int i = 0; i < str.length(); i++) {
+  for (int i = 0; i < str.length(); i++)
+  {
     val = val * 16 + str[i];
-    if('a' <= str[i]) val -= 'a' - 10;
-    else if('A' <= str[i]) val -= 'A' - 10;
-    else val -= '0';
+    if ('a' <= str[i])
+      val -= 'a' - 10;
+    else if ('A' <= str[i])
+      val -= 'A' - 10;
+    else
+      val -= '0';
   }
   return val;
 }

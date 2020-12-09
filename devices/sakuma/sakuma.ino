@@ -9,11 +9,11 @@ ClosedCube_OPT3001 opt3001;
 
 void configureSensor() {
   OPT3001_Config newConfig;
-	
-	newConfig.RangeNumber = B1100;	
-	newConfig.ConvertionTime = B0;
-	newConfig.Latch = B1;
-	newConfig.ModeOfConversionOperation = B11;
+
+  newConfig.RangeNumber = B1100;
+  newConfig.ConvertionTime = B0;
+  newConfig.Latch = B1;
+  newConfig.ModeOfConversionOperation = B11;
 
   opt3001.writeConfig(newConfig);
 }
@@ -23,10 +23,10 @@ void setup() {
   Serial2.begin(9600);
 
   myMHZ19.begin(Serial2); // 二酸化炭素センサ
-  hdc1080.begin(0x40); // 温度/湿度センサ
-	opt3001.begin(0x44); // 周辺光センサ
+  hdc1080.begin(0x40);    // 温度/湿度センサ
+  opt3001.begin(0x44);    // 周辺光センサ
 
-	configureSensor();
+  configureSensor();
 }
 
 void loop() {
