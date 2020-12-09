@@ -1,4 +1,4 @@
-require("./modules/kitami-light")
-require("./modules/shirasaka-co2")
+require("./modules/kitami")
+require("./modules/sakuma")
 
 console.log("Accessory setup finished!")

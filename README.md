@@ -16,6 +16,15 @@ MIzucoffee HOme => miho => miho "kohinata" !
 
 ユニットはArduinoで実装（更新したい）。
 
-### Shirasaka
-CO2を検出するユニット。M5StackをベースにMH-Z19Bセンサで検出。
+### Sakuma
+環境状態を検出するユニット。ESP32をベースに実装。
+
+#### MM-ENV01
+- 温度: Shiomi (HDC1080)
+- 湿度: Asari (HDC1080)
+- 周辺光: Moroboshi (OPT3001)
+
+#### MH-Z19B
+- 二酸化炭素: Shirasaka (MH-Z19B)
+
 しきい値である1000ppmを超えるとアラートが上がります。

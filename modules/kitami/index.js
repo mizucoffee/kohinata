@@ -6,7 +6,7 @@ const {
   Service,
   uuid,
 } = require("hap-nodejs");
-const Light = require("./light");
+const Light = require("../light");
 
 const accessoryUuid = uuid.generate("net.mizucoffee.kohinata.kitami");
 const accessory = new Accessory("Kitami Light", accessoryUuid);
@@ -18,7 +18,7 @@ accessory
   .setCharacteristic(Characteristic.SerialNumber, "kitami_2020_12_07_0001")
   .setCharacteristic(
     Characteristic.FirmwareRevision,
-    require("../package.json").version
+    require("../../package.json").version
   );
 
 const lightService = new Service.Lightbulb("Ceiling Light", "ceiling");
