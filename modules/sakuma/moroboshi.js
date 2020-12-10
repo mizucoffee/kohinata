@@ -5,9 +5,8 @@ const {
 } = require("hap-nodejs");
 
 class Moroboshi {
-  constructor(sensor) {
+  constructor() {
     this.data = 300;
-    this.sensor = sensor;
     this.service = new Service.LightSensor("Moroboshi", "moroboshi");
     this.characteristic = this.service.getCharacteristic(Characteristic.CurrentAmbientLightLevel);
 
@@ -15,6 +14,10 @@ class Moroboshi {
       callback(undefined, this.data);
     });
 
+  }
+  
+  setSensor(sensor) {
+    this.sensor = sensor;
     this.sensor.on("data", (data) => {
       const lux = parseFloat(data.toString().split(",")[3])
       if (Number.isFinite(lux)) this.data = lux
@@ -22,4 +25,4 @@ class Moroboshi {
   }
 }
 
-module.exports = Moroboshi
+module.exports = new Moroboshi()

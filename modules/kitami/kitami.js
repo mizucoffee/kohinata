@@ -3,34 +3,8 @@ const {
   CharacteristicEventTypes,
   Service,
 } = require("hap-nodejs");
-const SerialPort = require("serialport");
 
-class Light {
-  constructor() {
-    this.port = new SerialPort("COM9", { baudRate: 115200 });
-  }
-  fullPower() {
-    this.port.write("344A9034A4\n");
-  }
-  off() {
-    this.port.write("344A90F464\n");
-  }
-  fullWhite() {
-    this.port.write("344A9C51CD\n");
-  }
-  fullOrange() {
-    this.port.write("344A9CD14D\n");
-  }
-  changeWhite() {
-    this.port.write("344A9C0995\n");
-  }
-  changeOrange() {
-    this.port.write("344A9C8915\n");
-  }
-  nightLight() {
-    this.port.write("344A9074E4\n");
-  }
-}
+const { KitamiIR } = require("../shibuya").Shibuya;
 
 class Kitami {
   constructor() {
@@ -39,7 +13,6 @@ class Kitami {
       color: 240,
       colorLight: 240, // 制御用
     };
-    this.light = new Light();
     this.service = new Service.Lightbulb("Kitami", "kitami");
     this.onOffCharacteristic = this.service.getCharacteristic(
       Characteristic.On
@@ -55,8 +28,8 @@ class Kitami {
       })
       .on(CharacteristicEventTypes.SET, (state, callback) => {
         this.data.state = state;
-        if (this.data.state) this.light.fullPower();
-        else this.light.off();
+        if (this.data.state) KitamiIR.fullPower();
+        else KitamiIR.off();
 
         callback();
       });
@@ -99,13 +72,13 @@ class Kitami {
       // }
 
       if (this.data.color > this.data.colorLight) {
-        this.light.changeOrange();
+        KitamiIR.changeOrange();
         this.data.colorLight += 4;
         return setTimeout(watchColor, 300);
       }
 
       if (this.data.color < this.data.colorLight) {
-        this.light.changeWhite();
+        KitamiIR.changeWhite();
         this.data.colorLight -= 4;
         return setTimeout(watchColor, 300);
       }
@@ -114,8 +87,8 @@ class Kitami {
     };
 
     setTimeout(watchColor, 10);
-    setTimeout(() => this.light.fullPower(), 2000);
+    setTimeout(() => KitamiIR.fullPower(), 2000);
   }
 }
 
-module.exports = Kitami;
+module.exports = new Kitami();

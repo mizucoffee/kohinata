@@ -5,16 +5,18 @@ const {
 } = require("hap-nodejs");
 
 class Shiomi {
-  constructor(sensor) {
+  constructor() {
     this.data = 20;
-    this.sensor = sensor;
     this.service = new Service.TemperatureSensor("Shiomi", "shiomi");
     this.characteristic = this.service.getCharacteristic(Characteristic.CurrentTemperature);
 
     this.characteristic.on(CharacteristicEventTypes.GET, (callback) => {
       callback(undefined, this.data);
     });
+  }
 
+  setSensor(sensor) {
+    this.sensor = sensor;
     this.sensor.on("data", (data) => {
       const temp = parseFloat(data.toString().split(",")[0])
       if (Number.isFinite(temp)) this.data = temp
@@ -22,4 +24,4 @@ class Shiomi {
   }
 }
 
-module.exports = Shiomi
+module.exports = new Shiomi()

@@ -6,23 +6,22 @@ const {
   uuid,
 } = require("hap-nodejs");
 const git = require("git-rev-sync")
-const Kitami = require("./kitami");
+const kitami = require("./kitami");
 // const Sagikawa = require("./sagisawa");
 
-const accessoryUuid = uuid.generate("net.mizucoffee.kohinata.shibuya");
-const accessory = new Accessory("Shibuya", accessoryUuid);
+const accessoryUuid = uuid.generate("net.mizucoffee.kohinata.kitami");
+const accessory = new Accessory("Kitami", accessoryUuid);
 
 accessory
   .getService(Service.AccessoryInformation)
   .setCharacteristic(Characteristic.Manufacturer, "mizucoffee")
-  .setCharacteristic(Characteristic.Model, "Shibuya")
-  .setCharacteristic(Characteristic.SerialNumber, `shibuya_${git.short()}`)
+  .setCharacteristic(Characteristic.Model, "Kitami")
+  .setCharacteristic(Characteristic.SerialNumber, `kitami_${git.short()}`)
   .setCharacteristic(
     Characteristic.FirmwareRevision,
     require("../../package.json").version
   );
 
-const kitami = new Kitami();
 // const sagikawa = new Sagikawa();
 
 accessory.addService(kitami.service); // 照明

@@ -2,10 +2,10 @@ const { Accessory, Categories, Characteristic, Service, uuid } = require("hap-no
 const SerialPort = require("serialport");
 const git = require("git-rev-sync")
 
-const Asari = require("./asari");
-const Moroboshi = require("./moroboshi");
-const Shiomi = require("./shiomi");
-const Shirasaka = require("./shirasaka");
+const asari = require("./asari");
+const moroboshi = require("./moroboshi");
+const shiomi = require("./shiomi");
+const shirasaka = require("./shirasaka");
 
 const sakumaPort = new SerialPort("COM8", { baudRate: 115200 });
 const sakuma = sakumaPort.pipe(new SerialPort.parsers.Readline({ delimiter: "\n" }));
@@ -23,10 +23,10 @@ accessory
     require("../../package.json").version
   );
 
-const shiomi = new Shiomi(sakuma);
-const asari = new Asari(sakuma);
-const shirasaka = new Shirasaka(sakuma);
-const moroboshi = new Moroboshi(sakuma);
+shiomi.setSensor(sakuma);
+asari.setSensor(sakuma);
+shirasaka.setSensor(sakuma);
+moroboshi.setSensor(sakuma);
 
 accessory.addService(shiomi.service); // 温度
 accessory.addService(asari.service); // 湿度

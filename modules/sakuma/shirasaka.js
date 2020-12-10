@@ -6,9 +6,8 @@ const {
 const {CO2_LEVELS_NORMAL, CO2_LEVELS_ABNORMAL} = Characteristic.CarbonDioxideDetected
 
 class Shirasaka {
-  constructor(sensor) {
+  constructor() {
     this.data = 400;
-    this.sensor = sensor;
     this.service = new Service.CarbonDioxideSensor("Shirasaka", "shirasaka");
     this.detectedCharacteristic = this.service.getCharacteristic(Characteristic.CarbonDioxideDetected);
     this.levelCharacteristic = this.service.getCharacteristic(Characteristic.CarbonDioxideLevel);
@@ -20,6 +19,10 @@ class Shirasaka {
       callback(undefined, this.data);
     });
 
+  }
+
+  setSensor(sensor) {
+    this.sensor = sensor;
     this.sensor.on("data", (data) => {
       const co2 = Number(data.toString().split(",")[2])
       if (Number.isFinite(co2)) this.data = co2
@@ -27,4 +30,4 @@ class Shirasaka {
   }
 }
 
-module.exports = Shirasaka
+module.exports = new Shirasaka()

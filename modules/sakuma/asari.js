@@ -5,9 +5,8 @@ const {
 } = require("hap-nodejs");
 
 class Asari {
-  constructor(sensor) {
+  constructor() {
     this.data = 20;
-    this.sensor = sensor;
     this.service = new Service.HumiditySensor("Asari", "asari");
     this.characteristic = this.service.getCharacteristic(Characteristic.CurrentRelativeHumidity);
 
@@ -15,6 +14,10 @@ class Asari {
       callback(undefined, this.data);
     });
 
+  }
+
+  setSensor(sensor) {
+    this.sensor = sensor;
     this.sensor.on("data", (data) => {
       const temp = parseFloat(data.toString().split(",")[1])
       if (Number.isFinite(temp)) this.data = temp
@@ -22,4 +25,4 @@ class Asari {
   }
 }
 
-module.exports = Asari
+module.exports = new Asari()
