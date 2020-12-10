@@ -1,4 +1,3 @@
-// IR制御デバイス
 const SerialPort = require("serialport")
 const port = new SerialPort("COM9", { baudRate: 115200 });
 
@@ -65,7 +64,6 @@ const Shibuya = {
       if (mode == ICHINOSE.MODE.DRY) data += ICHINOSE.DRY.MIDDLE; // 除湿モード
       if (mode == ICHINOSE.MODE.COOL) data += "06";
 
-      // if (fan == ICHINOSE.FAN.AUTO && swing == ICHINOSE.SWING.AUTO) data += "80";
       else {
         let fanData = "11"
         fanData += `000${swing.toString(2)}`.slice(-3)
@@ -73,7 +71,6 @@ const Shibuya = {
         data += `00${parseInt(fanData, 2).toString(16)}`.slice(-2);
       }
 
-      console.log(`m${data.toUpperCase()}`)
       port.write(`m${data.toUpperCase()}\n`);
     },
   },

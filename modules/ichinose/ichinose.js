@@ -11,7 +11,15 @@ const IchinoseIR = Shibuya.Shibuya.IchinoseIR;
 const ICHINOSE = Shibuya.ICHINOSE;
 
 class Ichinose {
-  constructor(sensor) {
+  constructor(sensor) {    
+    this.oldData = {
+      active: 0,
+      mode: 1,
+      speed: 100,
+      swing: 0,
+      heat: 21,
+      cool: 21,
+    };
     this.data = {
       active: 0,
       mode: 1,
@@ -99,8 +107,14 @@ class Ichinose {
       .on(SET, callback('swing'));
   }
 
+  isChanged() {
+    const res = Object.keys(this.data).some(key => this.oldData[key] != this.data[key])
+    this.oldData = Object.assign({}, this.data)
+    return res
+  }
+
   send() {
-    console.log(this.data)
+    if(!this.isChanged()) return
     let speed = 0;
     switch(this.data.speed){
       case 0: speed = ICHINOSE.FAN.QUIET; break;
@@ -117,12 +131,6 @@ class Ichinose {
       speed,
       this.data.swing ? ICHINOSE.SWING.MOVE : ICHINOSE.SWING.AUTO
     )
-    console.log(
-      this.data.active ? ICHINOSE.STATE.ON : ICHINOSE.STATE.OFF,
-      this.data.mode == 1 ? ICHINOSE.MODE.HEAT : ICHINOSE.MODE.COOL,
-      this.data.mode == 1 ? this.data.heat : this.data.cool,
-      speed,
-      this.data.swing ? ICHINOSE.SWING.MOVE : ICHINOSE.SWING.AUTO)
   }
 }
 
