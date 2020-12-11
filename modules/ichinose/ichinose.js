@@ -5,8 +5,8 @@ const {
 } = require("hap-nodejs");
 const { GET, SET } = CharacteristicEventTypes;
 
-const shiomi = require("../sakuma/shiomi");
-const Shibuya = require("../shibuya")
+const sakuma = require("../../controller/sakuma")
+const Shibuya = require("../../controller/shibuya")
 const IchinoseIR = Shibuya.Shibuya.IchinoseIR;
 const ICHINOSE = Shibuya.ICHINOSE;
 
@@ -88,7 +88,7 @@ class Ichinose {
       .on(SET, callback('mode'));
 
     this.tempCharacteristic
-      .on(GET, cb => cb(undefined, shiomi.data))
+      .on(GET, cb => cb(undefined, sakuma.temp))
 
     this.heatTargetCharacteristic
       .on(GET, cb => cb(undefined, this.data.heat))

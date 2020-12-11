@@ -4,7 +4,7 @@ const {
   Service,
 } = require("hap-nodejs");
 
-const { KitamiIR } = require("../shibuya").Shibuya;
+const { KitamiIR } = require("../../controller/shibuya").Shibuya;
 
 class Kitami {
   constructor() {

@@ -1,7 +1,6 @@
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <WebServer.h>
-#include <ESPmDNS.h>
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
 #include <ir_Mitsubishi.h>
@@ -69,7 +68,6 @@ void setup(void) {
     server.send(404, "text/plain", "404 Not found");
   });
   server.begin();
-  Serial.println("HTTP server started");
 }
 
 void loop(void) {
