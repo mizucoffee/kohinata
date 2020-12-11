@@ -4,6 +4,7 @@
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
 #include <ir_Mitsubishi.h>
+#include <queue>
 #include "wifi_info.h"
 
 IPAddress local_IP(192, 168, 101, 200);
@@ -16,6 +17,7 @@ WebServer server(80);
 
 IRsend irsend(4);
 IRMitsubishiAC m(4, false, true);
+std::queue<String> queue;
 
 uint64_t str2uint64(String str) {
   uint64_t val = 0;
@@ -61,7 +63,7 @@ void setup(void) {
   server.on("/send", []() {
     if(server.method() != HTTP_POST) return server.send(404, "text/plain", "404 Not found");
     if(!server.hasArg("data")) return server.send(400, "text/plain", "400 Invalid request");
-    send(server.arg("data"));
+    queue.push(server.arg("data"));
     server.send(200, "text/plain", "200 Ok");
   });
   server.onNotFound([]() {
@@ -72,6 +74,10 @@ void setup(void) {
 
 void loop(void) {
   server.handleClient();
+  if(!queue.empty()) {
+    send(queue.front());
+    queue.pop();
+  }
 }
 
 String send(String text) {
