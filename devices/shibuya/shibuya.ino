@@ -1,6 +1,19 @@
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <WebServer.h>
+#include <ESPmDNS.h>
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
 #include <ir_Mitsubishi.h>
+#include "wifi_info.h"
+
+IPAddress local_IP(192, 168, 101, 200);
+IPAddress gateway(192, 168, 101, 129);
+IPAddress subnet(255, 255, 255, 128);
+IPAddress primaryDNS(8, 8, 8, 8);
+IPAddress secondaryDNS(8, 8, 4, 4);
+
+WebServer server(80);
 
 IRsend irsend(4);
 IRMitsubishiAC m(4, false, true);
@@ -33,28 +46,48 @@ void sendMitsubishi(String data) {
   m.send(0);
 }
 
-void setup() {
+void setup(void) {
   irsend.begin();
-  Serial.begin(115200);
+  WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS);
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+  }
+
+  server.on("/", []() {
+    server.send(200, "text/plain", "IR Contoller Service Shibuya");
+  });
+  server.on("/send", []() {
+    if(server.method() != HTTP_POST) return server.send(404, "text/plain", "404 Not found");
+    if(!server.hasArg("data")) return server.send(400, "text/plain", "400 Invalid request");
+    send(server.arg("data"));
+    server.send(200, "text/plain", "200 Ok");
+  });
+  server.onNotFound([]() {
+    server.send(404, "text/plain", "404 Not found");
+  });
+  server.begin();
+  Serial.println("HTTP server started");
 }
 
-void loop() {
-  while (Serial.available() == 0);
-  String n = Serial.readStringUntil('\n');
+void loop(void) {
+  server.handleClient();
+}
 
-  char type = n[0];
-  String data = n.substring(1);
+String send(String text) {
+  char type = text[0];
+  String data = text.substring(1);
 
   switch (type) {
     case 'm':
-      Serial.println("Send Mitsubishi Code");
       sendMitsubishi(data);
-      break;
+      return "mitsubishi";
     case 'p':
-      Serial.println("Send Panasonic Code");
       sendPanasonic(data);
-      break;
+      return "mitsubishi";
     default:
-      Serial.println("Unknown Code");
+      return "unknown";
   }
 }

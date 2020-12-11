@@ -6,6 +6,7 @@
   "author": "Ritsuki Goto <develop@mizucoffee.net>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.21.0",
     "git-rev-sync": "^3.0.1",
     "hap-nodejs": "^0.8.2",
     "npm": "^6.14.9",

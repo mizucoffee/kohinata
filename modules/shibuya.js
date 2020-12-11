@@ -1,5 +1,8 @@
-const SerialPort = require("serialport")
-const port = new SerialPort("COM9", { baudRate: 115200 });
+const axios = require("axios")
+
+function send(data) {
+  axios.post(`http://192.168.101.200/send?data=${data}`)
+}
 
 const ICHINOSE = {
   STATE: {
@@ -37,13 +40,13 @@ const ICHINOSE = {
 
 const Shibuya = {
   KitamiIR: {
-    fullPower: () => port.write("p344A9034A4\n"),
-    off: () => port.write("p344A90F464\n"),
-    fullWhite: () => port.write("p344A9C51CD\n"),
-    fullOrange: () => port.write("p344A9CD14D\n"),
-    changeWhite: () => port.write("p344A9C0995\n"),
-    changeOrange: () => port.write("p344A9C8915\n"),
-    nightLight: () => port.write("p344A9074E4\n"),
+    fullPower: () => send("p344A9034A4"),
+    off: () => send("p344A90F464"),
+    fullWhite: () => send("p344A9C51CD"),
+    fullOrange: () => send("p344A9CD14D"),
+    changeWhite: () => send("p344A9C0995"),
+    changeOrange: () => send("p344A9C8915"),
+    nightLight: () => send("p344A9074E4"),
   },
   IchinoseIR: {
     send: (on, mode, temp, fan, swing) => {
@@ -71,7 +74,7 @@ const Shibuya = {
         data += `00${parseInt(fanData, 2).toString(16)}`.slice(-2);
       }
 
-      port.write(`m${data.toUpperCase()}\n`);
+      send(`m${data.toUpperCase()}`);
     },
   },
 };
