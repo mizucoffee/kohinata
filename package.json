@@ -5,10 +5,19 @@
   "repository": "https://github.com/mizucoffee/kohinata.git",
   "author": "Ritsuki Goto <develop@mizucoffee.net>",
   "license": "MIT",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
   "dependencies": {
     "axios": "^0.21.0",
     "git-rev-sync": "^3.0.1",
     "hap-nodejs": "^0.8.2",
     "npm": "^6.14.9"
+  },
+  "devDependencies": {
+    "@types/git-rev-sync": "^2.0.0",
+    "@types/node": "^14.14.12",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
   }
 }

@@ -1,12 +1,12 @@
 const axios = require("axios")
 
 class Sakuma {
+  temp = 20;
+  humid = 20;
+  co2 = 400;
+  lux = 300;
+  
   constructor() {
-    this.temp = 20;
-    this.humid = 20;
-    this.co2 = 400;
-    this.lux = 300;
-
     const update = () => {
       axios.get('http://192.168.101.201/data').then(res => {
         this.temp = res.data.temp;
@@ -23,4 +23,4 @@ class Sakuma {
   }
 }
 
-module.exports = new Sakuma();
+export default new Sakuma();

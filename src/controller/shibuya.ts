@@ -1,7 +1,7 @@
-const axios = require("axios")
+import axios from "axios";
 
-function send(data) {
-  axios.post(`http://192.168.101.200/send?data=${data}`)
+function send(data: string) {
+  axios.post(`http://192.168.101.200/send?data=${data}`);
 }
 
 const ICHINOSE = {
@@ -12,7 +12,7 @@ const ICHINOSE = {
   MODE: {
     HEAT: 0,
     DRY: 1,
-    COOL: 2
+    COOL: 2,
   },
   FAN: {
     AUTO: 0,
@@ -29,13 +29,13 @@ const ICHINOSE = {
     S3: 3,
     S4: 4,
     S5: 5,
-    MOVE: 7
+    MOVE: 7,
   },
   DRY: {
-    LOW: '04',
-    MIDDLE: '02',
-    HIGH: '00',
-  }
+    LOW: "04",
+    MIDDLE: "02",
+    HIGH: "00",
+  },
 };
 
 const Shibuya = {
@@ -47,6 +47,8 @@ const Shibuya = {
     changeWhite: () => send("p344A9C0995"),
     changeOrange: () => send("p344A9C8915"),
     nightLight: () => send("p344A9074E4"),
+    bright: () => send("p344A9054C4"),
+    dark: () => send("p344A90D444"),
   },
   IchinoseIR: {
     send: (on, mode, temp, fan, swing) => {
@@ -66,18 +68,15 @@ const Shibuya = {
       if (mode == ICHINOSE.MODE.HEAT) data += "00";
       if (mode == ICHINOSE.MODE.DRY) data += ICHINOSE.DRY.MIDDLE; // 除湿モード
       if (mode == ICHINOSE.MODE.COOL) data += "06";
-
-      else {
-        let fanData = "11"
-        fanData += `000${swing.toString(2)}`.slice(-3)
-        fanData += `000${fan.toString(2)}`.slice(-3)
-        data += `00${parseInt(fanData, 2).toString(16)}`.slice(-2);
-      }
+     
+      let fanData = "11";
+      fanData += `000${swing.toString(2)}`.slice(-3);
+      fanData += `000${fan.toString(2)}`.slice(-3);
+      data += `00${parseInt(fanData, 2).toString(16)}`.slice(-2);
 
       send(`m${data.toUpperCase()}`);
     },
   },
 };
 
-module.exports.Shibuya = Shibuya;
-module.exports.ICHINOSE = ICHINOSE;
+export { Shibuya, ICHINOSE };
