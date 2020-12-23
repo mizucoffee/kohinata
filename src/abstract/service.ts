@@ -1,5 +1,8 @@
 import { Characteristic, CharacteristicChange, CharacteristicEventTypes, CharacteristicGetCallback, CharacteristicSetCallback, CharacteristicValue, Service, VoidCallback, WithUUID } from "hap-nodejs";
 
+/**
+ * Kohinataにおけるサービスの抽象クラス
+ */
 abstract class KohinataService {
   protected characteristics: Map<String, Characteristic> = new Map();
   service: Service;
@@ -10,6 +13,15 @@ abstract class KohinataService {
     this.service = service;
   }
 
+  /**
+   * サービスにCharacteristicを追加する関数
+   *
+   * @param name - 管理用の名前
+   * @param type - Characteristicの型
+   * @param value - Characteristicと紐付けて管理する値。未設定の場合は紐付けられない。
+   * 
+   * @returns 生成されたCharacteristic
+   */
   addChara(name: string, type: WithUUID<{new (): Characteristic;}>, value?: any) {
     const chara = this.service.getCharacteristic(type);
     this.characteristics.set(name, chara);
@@ -17,6 +29,13 @@ abstract class KohinataService {
     return chara;
   }
 
+  /**
+   * サービスのCharacteristicを取得する関数
+   *
+   * @param name - 管理用の名前。
+   * 
+   * @returns Characteristic、該当なしの場合undefined
+   */
   getChara(name: string) {
     return this.characteristics.get(name);
   }
