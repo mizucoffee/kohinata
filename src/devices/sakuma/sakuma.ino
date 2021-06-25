@@ -7,9 +7,9 @@
 #include <ClosedCube_OPT3001.h>
 #include "wifi_info.h"
 
-IPAddress local_IP(192, 168, 101, 201);
-IPAddress gateway(192, 168, 101, 129);
-IPAddress subnet(255, 255, 255, 128);
+IPAddress local_IP(192, 168, 105, 11);
+IPAddress gateway(192, 168, 104, 1);
+IPAddress subnet(255, 255, 254, 0);
 IPAddress primaryDNS(8, 8, 8, 8);
 IPAddress secondaryDNS(8, 8, 4, 4);
 
@@ -18,6 +18,7 @@ WebServer server(80);
 MHZ19 myMHZ19;
 ClosedCube_HDC1080 hdc1080;
 ClosedCube_OPT3001 opt3001;
+String hostname = "iot02";
 
 void configureSensor() {
   OPT3001_Config newConfig;
@@ -40,6 +41,7 @@ void setup(void) {
 
   WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS);
   WiFi.mode(WIFI_STA);
+  WiFi.setHostname(hostname.c_str());
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {

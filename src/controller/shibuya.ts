@@ -1,7 +1,7 @@
 import axios from "axios";
 
 function send(data: string) {
-  axios.post(`http://192.168.101.200/send?data=${data}`);
+  axios.post(`http://iot01.l.mizucoffee.com/send?data=${data}`);
 }
 
 const ICHINOSE = {

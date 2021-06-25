@@ -1,6 +1,6 @@
 import axios from "axios";
 
-class Hori {
+class Kurosaki {
   position = 0;
   
   constructor() {
@@ -9,7 +9,7 @@ class Hori {
         this.position = res.data.position;
         setTimeout(update, 1000)
       }).catch(e => {
-        console.log(e.name)
+        console.log(e)
         setTimeout(update, 1000)
       })
     }
@@ -21,4 +21,4 @@ class Hori {
   }
 }
 
-export default new Hori();
+export default new Kurosaki();

@@ -8,14 +8,14 @@ class Sakuma {
   
   constructor() {
     const update = () => {
-      axios.get('http://192.168.101.201/data').then(res => {
+      axios.get('http://iot02.l.mizucoffee.com/data').then(res => {
         this.temp = res.data.temp;
         this.humid = res.data.humid;
         this.co2 = res.data.co2;
         this.lux = res.data.lux;
         setTimeout(update, 1000)
       }).catch(e => {
-        console.log(e.name)
+        console.log(e)
         setTimeout(update, 1000)
       })
     }

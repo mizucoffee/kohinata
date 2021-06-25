@@ -1,7 +1,7 @@
 import { Characteristic, CharacteristicEventTypes, Service } from "hap-nodejs";
 
 import KohinataService from "../../abstract/service";
-import hori from "../../controller/hori";
+import kurosaki from "../../controller/kurosaki";
 
 class Hori extends KohinataService {
 
@@ -16,7 +16,7 @@ class Hori extends KohinataService {
     chara.on(CharacteristicEventTypes.GET, (callback) => {
       callback(undefined, this.data["current"]);
     })
-    setInterval(() => this.updateValue("current", hori.position), 1000)
+    setInterval(() => this.updateValue("current", kurosaki.position), 1000)
   }
 
   private addTargetPosition() {
@@ -26,7 +26,7 @@ class Hori extends KohinataService {
     })
     chara.on(CharacteristicEventTypes.SET, (state, callback) => {
       this.data['target'] = state;
-      hori.setPosition(this.data['target']);
+      kurosaki.setPosition(this.data['target']);
       callback();
     });
   }

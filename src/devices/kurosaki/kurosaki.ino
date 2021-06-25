@@ -41,7 +41,7 @@ void setup() {
     delay(500);
   }
   server.on("/", []() {
-    server.send(200, "text/plain", "Window Blind Control Service Hori");
+    server.send(200, "text/plain", "Window Blind Control Service Kurosaki");
   });
   server.on("/position", []() {
     if(server.method() == HTTP_GET) {

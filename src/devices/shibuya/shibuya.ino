@@ -7,9 +7,9 @@
 #include <queue>
 #include "wifi_info.h"
 
-IPAddress local_IP(192, 168, 101, 200);
-IPAddress gateway(192, 168, 101, 129);
-IPAddress subnet(255, 255, 255, 128);
+IPAddress local_IP(192, 168, 105, 10);
+IPAddress gateway(192, 168, 104, 1);
+IPAddress subnet(255, 255, 254, 0);
 IPAddress primaryDNS(8, 8, 8, 8);
 IPAddress secondaryDNS(8, 8, 4, 4);
 
@@ -18,6 +18,7 @@ WebServer server(80);
 IRsend irsend(4);
 IRMitsubishiAC m(4, false, true);
 std::queue<String> queue;
+String hostname = "iot01";
 
 uint64_t str2uint64(String str) {
   uint64_t val = 0;
@@ -51,6 +52,7 @@ void setup(void) {
   irsend.begin();
   WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS);
   WiFi.mode(WIFI_STA);
+  WiFi.setHostname(hostname.c_str());
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {

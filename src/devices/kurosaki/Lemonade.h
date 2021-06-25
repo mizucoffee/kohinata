@@ -21,7 +21,6 @@ class Lemonade {
     void update(void);
     void reset();
 
-
     // ==================
     //  Button
     // ==================

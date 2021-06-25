@@ -107,3 +107,4 @@ persist/
 .vscode/
 
 wifi_info.h
+*.DS_Store
