@@ -1,43 +1,158 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kohinata UI</title>
-</head>
-<body>
+    <link rel="manifest" href="manifest.json" />
+    <link
+      rel="stylesheet"
+      href="https://obs.mizucoffee.net/public/lineseed/lineseed.css"
+    />
+    <style>
+      * {
+        font-family: "LINESeed", sans-serif;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+
+        color: rgb(173, 173, 173);
+      }
+
+      body {
+        padding: 20px;
+        background-color: #0f0f0f;
+      }
+
+      h1 {
+        margin-top: 20px;
+      }
+
+      .flex {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 8px;
+        gap: 16px;
+      }
+
+      .button {
+        display: flex;
+        background-color: #414141;
+        border: none;
+        height: 100px;
+        font-size: 20px;
+        width: 10px;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        flex-grow: 1;
+      }
+
+      select {
+        display: block;
+        background-color: #414141;
+        border: none;
+        height: 40px;
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 10px;
+        flex-grow: 1;
+      }
+
+      input[type="radio"] {
+        display: none;
+      }
+
+      input[type="radio"] + label {
+        display: inline-block;
+        background-color: #414141;
+        border: none;
+        height: 40px;
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 10px;
+        flex-grow: 1;
+        text-align: center;
+        line-height: 40px;
+      }
+
+      input[type="radio"]:checked + label {
+        background-color: #6e6e6e;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
     <h1>照明</h1>
-    <button onclick="fetch('/light/on', {method: 'post'})">点ける</button>
-    <button onclick="fetch('/light/off', {method: 'post'})">消す</button>
+    <div class="flex">
+      <button class="button" onclick="fetch('/light/on', {method: 'post'})">
+        点ける
+      </button>
+      <button class="button" onclick="fetch('/light/off', {method: 'post'})">
+        消す
+      </button>
+    </div>
 
     <h1>エアコン</h1>
     <form action="/aircon" method="post">
-        <input type="radio" name="power" value="20" checked>On
-        <input type="radio" name="power" value="00">Off<br>
+        <div class="flex">
+      電源: <input type="radio" name="power" id="on" value="20" checked />
+      <label for="on">On</label>
+      <input type="radio" name="power" id="off" value="00" />
+      <label for="off">Off</label>
+      </div>
+      <div class="flex">
+        モード:
         <select name="mode">
-            <option value="0">暖房</option>
-            <option value="1">除湿</option>
-            <option value="2">冷房</option>
+          <option value="0">暖房</option>
+          <option value="1">除湿</option>
+          <option value="2">冷房</option>
         </select>
-        <input type="number" name="temp" value="24" style="width: 40px">℃<br>
+        温度:
+        <select name="temp">
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24" selected>24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option></select
+        >℃<br />
+      </div>
+
+      <div class="flex">
+        風量:
         <select name="fan">
-            <option value="0">自動</option>
-            <option value="6">静音</option>
-            <option value="1">弱</option>
-            <option value="2">中</option>
-            <option value="3">高</option>
-            <option value="4">最強</option>
+          <option value="0">自動</option>
+          <option value="6">静音</option>
+          <option value="1">弱</option>
+          <option value="2">中</option>
+          <option value="3">高</option>
+          <option value="4">最強</option>
         </select>
+        首振り:
         <select name="swing">
-            <option value="0">自動</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="7">動く</option>
+          <option value="0">自動</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="7">動く</option>
         </select>
-        <button type="submit">送信</button>
+      </div>
+      <div class="flex">
+        <button class="button" type="submit">送信</button>
+      </div>
     </form>
-</body>
+  </body>
 </html>
