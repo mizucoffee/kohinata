@@ -20,3 +20,4 @@ ichinose.publish()
 santaclaus.publish()
 
 console.log("Accessory setup finished!");
+  

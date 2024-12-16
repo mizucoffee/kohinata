@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kohinata UI</title>
+</head>
+<body>
+    <h1>照明</h1>
+    <button onclick="fetch('/light/on', {method: 'post'})">点ける</button>
+    <button onclick="fetch('/light/off', {method: 'post'})">消す</button>
+
+    <h1>エアコン</h1>
+    <form action="/aircon" method="post">
+        <input type="radio" name="power" value="20" checked>On
+        <input type="radio" name="power" value="00">Off<br>
+        <select name="mode">
+            <option value="0">暖房</option>
+            <option value="1">除湿</option>
+            <option value="2">冷房</option>
+        </select>
+        <input type="number" name="temp" value="24" style="width: 40px">℃<br>
+        <select name="fan">
+            <option value="0">自動</option>
+            <option value="6">静音</option>
+            <option value="1">弱</option>
+            <option value="2">中</option>
+            <option value="3">高</option>
+            <option value="4">最強</option>
+        </select>
+        <select name="swing">
+            <option value="0">自動</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="7">動く</option>
+        </select>
+        <button type="submit">送信</button>
+    </form>
+</body>
+</html>
