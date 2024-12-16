@@ -10,7 +10,7 @@ class IchinoseAccessory extends KohinataAccessory {
     this.setManufacturer("mizucoffee");
     this.setModel("Ichinose");
     this.setSerialNumber(`ichinose_${git.short()}`);
-    this.setFirmwareRevision(process.env.npm_package_version);
+    this.setFirmwareRevision(process.env.npm_package_version || "");
 
     this.accessory.addService(ichinose.service); // 空調
   }

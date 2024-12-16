@@ -11,7 +11,7 @@ class TotokiAccessory extends KohinataAccessory {
     this.setManufacturer("mizucoffee");
     this.setModel("Totoki");
     this.setSerialNumber(`totoki_${git.short()}`);
-    this.setFirmwareRevision(process.env.npm_package_version)
+    this.setFirmwareRevision(process.env.npm_package_version || "")
 
     this.accessory.addService(totoki.service);
   }

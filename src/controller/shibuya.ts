@@ -51,7 +51,7 @@ const Shibuya = {
     dark: () => send("p344A90D444"),
   },
   IchinoseIR: {
-    send: (on, mode, temp, fan, swing) => {
+    send: (on: string, mode: number, temp: any, fan: number, swing: number) => {
       let data = "";
       data += on;
 

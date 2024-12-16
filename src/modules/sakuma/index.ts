@@ -15,7 +15,7 @@ class SakumaAccessory extends KohinataAccessory {
     this.setManufacturer("mizucoffee");
     this.setModel("Sakuma");
     this.setSerialNumber(`sakuma_${git.short()}`);
-    this.setFirmwareRevision(process.env.npm_package_version)
+    this.setFirmwareRevision(process.env.npm_package_version || "")
 
     this.accessory.addService(shiomi.service); // 温度
     this.accessory.addService(asari.service); // 湿度

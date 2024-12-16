@@ -10,7 +10,7 @@ class HoriAccessory extends KohinataAccessory {
     this.setManufacturer("mizucoffee");
     this.setModel("Hori");
     this.setSerialNumber(`hori_${git.short()}`);
-    this.setFirmwareRevision(process.env.npm_package_version);
+    this.setFirmwareRevision(process.env.npm_package_version || "");
 
     this.accessory.addService(hori.service); // カーテン
   }

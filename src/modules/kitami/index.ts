@@ -12,7 +12,7 @@ class KitamiAccessory extends KohinataAccessory {
     this.setManufacturer("mizucoffee");
     this.setModel("Kitami");
     this.setSerialNumber(`kitami_${git.short()}`);
-    this.setFirmwareRevision(process.env.npm_package_version)
+    this.setFirmwareRevision(process.env.npm_package_version || "")
 
     // kitami.on("on", state => {
       // if(state) sagikawa.updateValue("on", false);
@@ -31,7 +31,7 @@ class KitamiAccessory extends KohinataAccessory {
       pincode: "080-56-081",
       port: 47129,
       category: Categories.LIGHTBULB,
-    });
+    }, true);
   }
 }
 

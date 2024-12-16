@@ -40,16 +40,16 @@ abstract class KohinataService {
     return this.characteristics.get(name);
   }
 
-  onGET(name: string, callback: ((change: CharacteristicChange) => void) | ((cb: CharacteristicGetCallback<CharacteristicValue>, context?: any, connectionID?: string) => void) | ((value: CharacteristicValue, cb: CharacteristicSetCallback, context?: any, connectionID?: string) => void) | VoidCallback) {
-    this.characteristics.get(name).on(CharacteristicEventTypes.GET, callback);
-  }
+  // onGET(name: string, callback: ((change: CharacteristicChange) => void) | ((cb: CharacteristicGetCallback, context?: any, connectionID?: string) => void) | ((value: CharacteristicValue, cb: CharacteristicSetCallback, context?: any, connectionID?: string) => void) | VoidCallback) {
+  //   this.characteristics.get(name)?.on(CharacteristicEventTypes.GET, callback);
+  // }
 
-  onSET(name: string, callback: ((change: CharacteristicChange) => void) | ((cb: CharacteristicGetCallback<CharacteristicValue>, context?: any, connectionID?: string) => void) | ((value: CharacteristicValue, cb: CharacteristicSetCallback, context?: any, connectionID?: string) => void) | VoidCallback) {
-    this.characteristics.get(name).on(CharacteristicEventTypes.SET, callback);
-  }
+  // onSET(name: string, callback: ((change: CharacteristicChange) => void) | ((cb: CharacteristicGetCallback, context?: any, connectionID?: string) => void) | ((value: CharacteristicValue, cb: CharacteristicSetCallback, context?: any, connectionID?: string) => void) | VoidCallback) {
+  //   this.characteristics.get(name)?.on(CharacteristicEventTypes.SET, callback);
+  // }
 
   updateValue(name: string, value: any) {
-    this.getChara(name).updateValue(value);
+    this.getChara(name)?.updateValue(value);
     if(this.data[name] != undefined) this.data[name] = value;
   }
 

@@ -18,7 +18,7 @@ class Santaclaus extends KohinataService {
     chara.on(CharacteristicEventTypes.SET, (state, callback) => {
       this.data["on"] = state;
       this.call("on", state);
-      Sakurai.push(1)
+      Sakurai.push("1")
       callback();
     });
   }

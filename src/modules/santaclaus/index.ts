@@ -11,7 +11,7 @@ class SantaclausAccessory extends KohinataAccessory {
     this.setManufacturer("mizucoffee");
     this.setModel("Santaclaus");
     this.setSerialNumber(`santaclaus_${git.short()}`);
-    this.setFirmwareRevision(process.env.npm_package_version)
+    this.setFirmwareRevision(process.env.npm_package_version || "")
 
     this.accessory.addService(santaclaus.service);
   }

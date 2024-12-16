@@ -1,19 +1,19 @@
 import { Characteristic, CharacteristicEventTypes, Service } from "hap-nodejs";
 
 import KohinataService from "../../abstract/service";
-import sakuma from "../../controller/sakuma";
+// import sakuma from "../../controller/sakuma";
 import { Shibuya, ICHINOSE } from "../../controller/shibuya";
 
 const IchinoseIR = Shibuya.IchinoseIR;
 
 class Ichinose extends KohinataService {  
-  oldData = {}
+  oldData: any = {}
 
   constructor() {
     super(new Service.HeaterCooler("Ichinose", "ichinose"));
     this.addActive()
     this.addMode()
-    this.addTemp()
+    // this.addTemp()
     this.addRotation()
     this.addSwing()
     this.addTargetHeat()
@@ -47,13 +47,13 @@ class Ichinose extends KohinataService {
     });
   }
 
-  private addTemp() {
-    const chara = this.addChara("temp", Characteristic.CurrentTemperature);
-    chara.on(CharacteristicEventTypes.GET, (callback) => {
-      callback(undefined, sakuma.temp);
-    })
-    setInterval(() => this.updateValue("temp", sakuma.temp), 1000)
-  }
+  // private addTemp() {
+  //   const chara = this.addChara("temp", Characteristic.CurrentTemperature);
+  //   chara.on(CharacteristicEventTypes.GET, (callback) => {
+  //     callback(undefined, sakuma.temp);
+  //   })
+  //   setInterval(() => this.updateValue("temp", sakuma.temp), 1000)
+  // }
 
   private addRotation() {
     const chara = this.addChara("rotation", Characteristic.RotationSpeed, 100);
@@ -111,9 +111,9 @@ class Ichinose extends KohinataService {
   }
 
   isChanged() {
-    const res = Object.keys(this.data).some(key => this.oldData[key] != this.data[key])
+    const isChanged = Object.keys(this.data).find(key => this.oldData[key] != this.data[key])
     this.oldData = Object.assign({}, this.data)
-    return res
+    return isChanged
   }
 
   send() {

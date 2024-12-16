@@ -11,7 +11,9 @@ abstract class KohinataAccessory {
 
   constructor(name: string, id: string) {
     this.accessory = new Accessory(name, uuid.generate(id));
-    this.info = this.accessory.getService(Service.AccessoryInformation)
+    const info = this.accessory.getService(Service.AccessoryInformation) 
+    if (!info) throw new Error("AccessoryInformation service not found")
+    this.info = info
   }
 
   protected setManufacturer(manufacturer: string) {

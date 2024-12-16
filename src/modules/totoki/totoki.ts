@@ -16,7 +16,7 @@ class Kitami extends KohinataService {
       callback(undefined, this.data["on"]);
     })
     chara.on(CharacteristicEventTypes.SET, (state, callback) => {
-      Sakurai.push(0).then(res => {
+      Sakurai.push("0").then(res => {
         callback();
         this.data["on"] = state;
         this.call("on", state);
