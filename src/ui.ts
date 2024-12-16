@@ -5,6 +5,8 @@ import cron from "node-cron";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
 const KitamiIR = Shibuya.KitamiIR;
 const IchinoseIR = Shibuya.IchinoseIR;
 
