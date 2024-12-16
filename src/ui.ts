@@ -10,11 +10,11 @@ app.use(express.static("public"));
 const KitamiIR = Shibuya.KitamiIR;
 const IchinoseIR = Shibuya.IchinoseIR;
 
-cron.schedule("10 8 * * * 1-5", async () => {
+cron.schedule("10 8 * * 1-5", async () => {
   KitamiIR.fullPower();
 });
 
-cron.schedule("40 7 * * * 1-5", async () => {
+cron.schedule("40 7 * * 1-5", async () => {
   IchinoseIR.send("20", 0, 24, 0, 0);
 });
 
