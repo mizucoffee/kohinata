@@ -1,5 +1,6 @@
 import express from "express";
 import { Shibuya } from "./controller/shibuya";
+import Sakurai from "./controller/sakurai";
 import cron from "node-cron";
 
 const app = express();
@@ -29,6 +30,11 @@ app.post("/light/on", (req, res) => {
 
 app.post("/light/off", (req, res) => {
   KitamiIR.off();
+  res.redirect("/");
+});
+
+app.post("/light/hiroen", (req, res) => {
+  Sakurai.push("0");
   res.redirect("/");
 });
 
